@@ -1,11 +1,16 @@
 # Дипломное задание к курсу «Продвинутый JavaScript в браузере». Chaos Organizer
 ---
+AppVeyor: [![Build status](https://ci.appveyor.com/api/projects/status/9s0lwxgxop7gnpe5?svg=true)](https://ci.appveyor.com/project/RomanMenshikov92/ahj-diploma-frontend)
 
-Ссылка на GutHub
+GutHub: [LINK-WEBSITE](https://romanmenshikov92.github.io/ahj-diploma-frontend/)
 
-[![Build status](https://ci.appveyor.com/api/projects/status/9s0lwxgxop7gnpe5?svg=true)](https://ci.appveyor.com/project/RomanMenshikov92/ahj-diploma-frontend)
+Frontend-project: [LINK-FRONTEND](https://github.com/RomanMenshikov92/ahj-diploma-frontend)
 
-## Выполнены некоторые обязательные и необязательные для реализации функции:
+Backend-project: [LINK-BACKEND](https://github.com/RomanMenshikov92/ahj-diploma-backend)
+
+Также сервер выложен на render.com: [LINK-SERVER-RENDER](https://ahj-diploma-backend-7rkr.onrender.com)
+
+## Выполнены реализованные функции:
 
 1. Сохранение в истории ссылок и текстовых сообщений --> Здесь ввод осуществляется в поле внизу и сохраняется после нажатия Enter.
 2. Ссылки (http:// или https://) должны быть кликабельны и отображаться, как ссылки --> Здесь они кликабельны и отображаются как ссылки.
