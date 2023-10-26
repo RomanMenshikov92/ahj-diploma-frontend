@@ -3,6 +3,7 @@
 
 Ссылка на GutHub
 
+[![Build status](https://ci.appveyor.com/api/projects/status/9s0lwxgxop7gnpe5?svg=true)](https://ci.appveyor.com/project/RomanMenshikov92/ahj-diploma-frontend)
 
 ## Выполнены некоторые обязательные и необязательные для реализации функции:
 
