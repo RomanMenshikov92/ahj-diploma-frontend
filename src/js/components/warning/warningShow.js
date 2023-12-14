@@ -1,4 +1,4 @@
-import Position from '../poster/Position';
+import Position from '../poster/position';
 
 export default class WarningShow {
   constructor(container) {

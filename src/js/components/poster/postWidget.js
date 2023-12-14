@@ -1,11 +1,11 @@
-import Position from './Position';
-import Post from './Post';
-import PostList from './PostList';
-import PostService from './PostService';
-import FileUploader from '../files/FileUploader';
-import WarningShow from '../warning/WarningShow';
-import VideoRec from '../media/VideoRec';
-import AudioRec from '../media/AudioRec';
+import Position from './position';
+import Post from './post';
+import PostList from './postList';
+import PostService from './postService';
+import FileUploader from '../files/fileUploader';
+import WarningShow from '../warning/warningShow';
+import VideoRec from '../media/videoRec';
+import AudioRec from '../media/audioRec';
 
 export default class PostWidget {
   constructor(containerName) {
@@ -329,7 +329,9 @@ export default class PostWidget {
       loadMorePosts();
       this.container.addEventListener('scroll', () => {
         console.log('99999999');
-        if (this.container.scrollTop === 0) { loadMorePosts(); }
+        if (this.container.scrollTop === 0) {
+          loadMorePosts();
+        }
       });
     }
   }

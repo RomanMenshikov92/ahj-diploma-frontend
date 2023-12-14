@@ -1,4 +1,4 @@
-import Timer from '../poster/Timer';
+import Timer from '../poster/timer';
 
 export default class VideoRec {
   constructor(form, createPostShowAll, postService, url) {
