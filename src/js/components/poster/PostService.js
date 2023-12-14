@@ -1,4 +1,4 @@
-import createRequest from '../../api/createRequest';
+import createRequest from '../../api/CreateRequest';
 
 /**
  *  Класс для связи с сервером.

@@ -1,4 +1,4 @@
-export default class AudioRec {
+export default class audioRec {
   constructor(form, createPostShowAll, postService, url) {
     this.form = form;
     this.createPostShowAll = createPostShowAll;
