@@ -35,7 +35,7 @@ export default class FileUploader {
 
     this.postService.upload(data, (d) => {
       console.log('uploaded');
-      url = `${this.url}${d}`; // `http://localhost:3000${d}`;
+      url = `${this.url}${d}`; // `http://localhost:4000${d}`;
 
       if (file.type.includes('image')) {
         this.createPostShowAll(url, 'img');
@@ -60,7 +60,7 @@ export default class FileUploader {
 
     this.postService.upload(data, (d) => {
       console.log('uploaded');
-      url = `${this.url}${d}`; // `http://localhost:3000${d}`;
+      url = `${this.url}${d}`; // `http://localhost:4000${d}`;
 
       if (file.type.includes('image')) {
         this.createPostShowAll(url, 'img');

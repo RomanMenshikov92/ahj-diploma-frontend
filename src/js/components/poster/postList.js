@@ -10,7 +10,6 @@ export default class PostList {
         resolve(data);
       });
     });
-
     return await added;
   }
 

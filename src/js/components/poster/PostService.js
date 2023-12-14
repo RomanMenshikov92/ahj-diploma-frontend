@@ -1,4 +1,4 @@
-import createRequest from '../../api/createRequest';
+import createRequest from '../../api/CreateRequest';
 
 /**
  *  Класс для связи с сервером.
@@ -9,9 +9,9 @@ export default class PostService {
     this.url = url;
   }
 
-  async list(callback) {
+  async list(page, callback) {
     createRequest({
-      url: this.url,
+      url: `${this.url}?page=${page}&limit=10`,
       sendMethod: 'GET',
       method: 'allPosts',
       callback,

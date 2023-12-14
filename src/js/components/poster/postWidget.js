@@ -1,17 +1,17 @@
-import Position from './position';
-import Timer from './timer';
-import Post from './post';
-import PostList from './postList';
+import Position from './Position';
+import Post from './Post';
+import PostList from './PostList';
 import PostService from './PostService';
-import FileUploader from '../files/fileUploader';
-import WarningShow from '../warning/warningShow';
-import VideoRec from '../media/videoRec';
+import FileUploader from '../files/FileUploader';
+import WarningShow from '../warning/WarningShow';
+import VideoRec from '../media/VideoRec';
+import AudioRec from '../media/AudioRec';
 
 export default class PostWidget {
   constructor(containerName) {
     // set urls to the server
     if (process.env.NODE_ENV === 'development') {
-      this.urlServer = 'http://localhost:3000';
+      this.urlServer = 'http://localhost:3333';
     } else {
       this.urlServer = 'https://ahj-diploma-backend-7rkr.onrender.com';
     }
@@ -58,6 +58,17 @@ export default class PostWidget {
             <path d="M16.4142 10.5858C15.6332 11.3668 15.6332 12.6332 16.4142 13.4142L19.2929 16.2929C19.9229 16.9229 21 16.4767 21 15.5858V8.41421C21 7.52331 19.9229 7.07714 19.2929 7.70711L16.4142 10.5858Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
         </span>
+        <span class="post-audio">
+        <svg fill="#000000" width="800px" height="800px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <g data-name="Layer 2" id="Layer_2">
+        <path d="M16,30a1,1,0,0,1-1-1V25a1,1,0,0,1,2,0v4A1,1,0,0,1,16,30Z"/>
+        <path d="M24,26H8a2,2,0,0,1-2-2V23a1,1,0,0,1,2,0v1H24V22a1,1,0,0,1,2,0v2A2,2,0,0,1,24,26Z"/>
+        <path d="M18,23H14a5,5,0,0,1-5-5V8a5,5,0,0,1,5-5h4a5,5,0,0,1,5,5V18A5,5,0,0,1,18,23ZM14,5a3,3,0,0,0-3,3V18a3,3,0,0,0,3,3h4a3,3,0,0,0,3-3V8a3,3,0,0,0-3-3Z"/>
+        <path d="M14,9a1,1,0,0,1-1-1V5a1,1,0,0,1,2,0V8A1,1,0,0,1,14,9Z"/>
+        <path d="M18,9a1,1,0,0,1-1-1V5a1,1,0,0,1,2,0V8A1,1,0,0,1,18,9Z"/>
+        </g>
+        </svg>
+      </span>
         <span class="location-btn">
         <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 21C15.5 17.4 19 14.1764 19 10.2C19 6.22355 15.866 3 12 3C8.13401 3 5 6.22355 5 10.2C5 14.1764 8.5 17.4 12 21Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -100,9 +111,25 @@ export default class PostWidget {
   .toString()
   .padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}
             </div>
-            <div class="post__content">
+            <div class="post__content-video">
               <video class="${post.content.className}" src="${post.content.src}" controls>
               </video>
+            </div>
+        </div>
+    `;
+    }
+    if (post.type === 'audio') {
+      return `
+        <div class="post" data-id="${post.id}">
+            <div class="post__date">
+              ${date.getDate().toString().padStart(2, '0')}.${date.getMonth().toString().padStart(2, '0')}.${date.getFullYear()} ${date
+  .getHours()
+  .toString()
+  .padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}
+            </div>
+            <div class="post__content-audio">
+              <audio class="${post.content.className}" src="${post.content.src}" controls>
+              </audio>
             </div>
         </div>
     `;
@@ -116,8 +143,8 @@ export default class PostWidget {
   .toString()
   .padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}
               </div>
-              <div class="post__content">
-                <a href="${post.content}">${post.content}</a>
+              <div class="post__content-url">
+                <a href="${post.content}" target="_blank">${post.content}</a>
               </div>
           </div>
       `;
@@ -131,7 +158,7 @@ export default class PostWidget {
   .toString()
   .padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}
             </div>
-            <div class="post__content">
+            <div class="post__content-loc">
               [${post.content.lat}, ${post.content.long}]
             </div>
         </div>
@@ -146,8 +173,8 @@ export default class PostWidget {
   .toString()
   .padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}
             </div>
-            <div class="post__content">
-              <a download href="${post.content}" rel="noopener" name="abc">
+            <div class="post__content-img">
+              <a download href="${post.content}" rel="noopener" name="abc" target="_blank">
                 <img class="post__img" src="${post.content}">
               </a>
             </div>
@@ -163,7 +190,7 @@ export default class PostWidget {
   .toString()
   .padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}
             </div>
-            <div class="post__content">
+            <div class="post__content-vid">
               <video class="video-post" controls src="${post.content}"></video>
             </div>
         </div>
@@ -178,8 +205,8 @@ export default class PostWidget {
   .toString()
   .padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}
             </div>
-            <div class="post__content">
-              <audio controls src="${post.content}"></audio>
+            <div class="post__content-aud">
+              <audio class="audio-post" controls src="${post.content}"></audio>
             </div>
         </div>
     `;
@@ -204,19 +231,30 @@ export default class PostWidget {
     const div = document.createElement('div');
     div.className = 'post-container';
     this.container.insertBefore(div, this.form);
-
-    this.postService.list((posts) => {
-      posts.forEach((item) => {
-        const elemCode = this.renderPost(item);
-        div.insertAdjacentHTML('beforeend', elemCode);
+    let page = 1;
+    const loadMorePosts = async () => {
+      await this.postService.list(page, (posts) => {
+        if (posts.length > 0) {
+          posts.reverse().forEach((item) => {
+            console.log('55555');
+            const existingPost = this.postContainer.querySelector(`.post[data-id="${item.id}"]`);
+            if (!existingPost) {
+              const elemCode = this.renderPost(item);
+              div.insertAdjacentHTML('afterbegin', elemCode);
+            }
+          });
+          page++;
+          this.container.scrollTop = this.container.scrollHeight;
+        }
       });
-
-      this.postContainer = div;
-
-      // scroll container to the bottom
-      setTimeout(() => {
-        this.container.scrollTop = this.container.scrollHeight;
-      }, 100);
+    };
+    loadMorePosts();
+    this.postContainer = div;
+    this.container.addEventListener('scroll', () => {
+      console.log('123');
+      if (this.container.scrollTop === 0) {
+        loadMorePosts();
+      }
     });
   }
 
@@ -245,6 +283,10 @@ export default class PostWidget {
     // create new VideoRec
     this.videoRec = new VideoRec(this.form, this.createPostShowAll.bind(this), this.postService, this.urlServer);
     this.videoRec.bindToDOM();
+
+    // create new AudioRec
+    this.audioRec = new AudioRec(this.form, this.createPostShowAll.bind(this), this.postService, this.urlServer);
+    this.audioRec.bindToDOM();
   }
 
   clearPosts() {
@@ -255,26 +297,41 @@ export default class PostWidget {
   }
 
   updatePosts(searchedPosts) {
-    // if we show only searched posts
+    const prevScrollHeight = this.container.scrollHeight;
     if (searchedPosts) {
       searchedPosts.forEach((item) => {
         const elemCode = this.renderPost(item);
+        console.log('111111111');
         this.postContainer.insertAdjacentHTML('beforeend', elemCode);
+        this.container.scrollTop = this.container.scrollHeight;
       });
     } else {
-      // if we show all posts
-      this.postService.list((posts) => {
-        posts.forEach((item) => {
-          const elemCode = this.renderPost(item);
-          this.postContainer.insertAdjacentHTML('beforeend', elemCode);
+      let page = 1;
+      const loadMorePosts = async () => {
+        await this.postService.list(page, (posts) => {
+          if (posts.length > 0) {
+            posts.reverse().forEach((item) => {
+              console.log('222222');
+              const existingPost = this.postContainer.querySelector(`.post[data-id="${item.id}"]`);
+              if (!existingPost) {
+                const elemCode = this.renderPost(item);
+                this.postContainer.insertAdjacentHTML('afterbegin', elemCode);
+              }
+            });
+            page++;
+            this.container.scrollTop = this.container.scrollHeight;
+            if (this.container.scrollTop === 0) {
+              loadMorePosts();
+            }
+          }
         });
+      };
+      loadMorePosts();
+      this.container.addEventListener('scroll', () => {
+        console.log('99999999');
+        if (this.container.scrollTop === 0) { loadMorePosts(); }
       });
     }
-
-    // scroll container to the bottom
-    setTimeout(() => {
-      this.container.scrollTop = this.container.scrollHeight;
-    }, 100);
   }
 
   async createPostShowAll(content, type) {
@@ -340,18 +397,18 @@ export default class PostWidget {
   async onFilter(e) {
     let filteredPosts;
     if (e.target.classList.contains('filter_img')) {
-      this.postList.filter('type', 'img').then((posts) => {
-        this.clearPosts();
+      await this.postList.filter('type', 'img').then((posts) => {
+        this.clearPosts(posts);
         this.updatePosts(posts);
       });
     } else if (e.target.classList.contains('filter_video')) {
-      this.postList.filter('type', 'vid').then((posts) => {
-        this.clearPosts();
+      await this.postList.filter('type', 'vid').then((posts) => {
+        this.clearPosts(posts);
         this.updatePosts(posts);
       });
     } else if (e.target.classList.contains('filter_audio')) {
-      this.postList.filter('type', 'aud').then((posts) => {
-        this.clearPosts();
+      await this.postList.filter('type', 'aud').then((posts) => {
+        this.clearPosts(posts);
         this.updatePosts(posts);
       });
     }
