@@ -7,7 +7,7 @@ import WarningShow from '../warning/WarningShow';
 import VideoRec from '../media/VideoRec';
 import AudioRec from '../media/AudioRec';
 
-export default class postWidget {
+export default class PostWidget {
   constructor(containerName) {
     // set urls to the server
     if (process.env.NODE_ENV === 'development') {
